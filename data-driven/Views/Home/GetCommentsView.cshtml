@@ -1,0 +1,17 @@
+﻿@using data_driven.Models
+@model List<UserComment>
+
+
+<h2>Reviews: </h2>
+
+@foreach (UserComment comment in Model)
+{
+    <div class="row">
+        <h4>@comment.UserName</h4>
+        <h4>@comment.CommentTitle</h4>
+        <h4>@comment.Date.ToString("dd.MM.yyyy")</h4>
+        <h4>@comment.Comment</h4>
+        <h4>@comment.Rate / 5</h4>
+    </div>
+    <hr />
+}

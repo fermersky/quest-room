@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Adding new room page";
+}
+
+
+<div class="row">
+    <h1 style="text-align:center" class="col-md-12">Adding a new quest room</h1>
+</div>
+
+<form action="/admin/add" method="post" class="row" style="margin-bottom: 500px">
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <div class="col-md-12">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="text" name="Title">
+            <label class="mdl-textfield__label" for="Title">Title</label>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="text" name="Description">
+            <label class="mdl-textfield__label" for="Description">Description</label>
+        </div>
+    </div>
+
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-clock"></i>
+    </div>
+
+    <div class="col-md-12">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="number" name="DurationTime">
+            <label class="mdl-textfield__label" for="DurationTime">Duration Time (hours)</label>
+        </div>
+    </div>
+
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-user-friends"></i>
+    </div>
+
+    <div class="col-md-12">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="number" name="MinPlayersCount">
+            <label class="mdl-textfield__label" for="MinPlayersCount">Min Players Count</label>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="number" name="MaxPlayersCount">
+            <label class="mdl-textfield__label" for="MaxPlayersCount">Max Players Count</label>
+        </div>
+    </div>
+
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-angry"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
+    </div>
+
+    <div style="width:300px" class="col-md-12 fear-level-slider">
+        <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+    </div>
+
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-surprise"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
+    </div>
+
+    <div style="width:300px" class="col-md-12 fear-level-slider">
+        <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+    </div>
+
+
+    <div class="col-md-12" style="text-align: center; padding-top: 50px;">
+        <button style="transform: scale(1.5)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Add new quest room to db
+        </button>
+    </div>
+</form>
+
+@section styles {
+    <link href="~/Content/css/add-form.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#fearLevelRange").on('input', function (e) {
+                $("#currentFearLevel").text($(this).val());
+            });
+
+            $("#difficultyLevelRange").on('input', function (e) {
+                $("#currentDifficultyLevel").text($(this).val());
+            });
+        });
+    </script>
+}

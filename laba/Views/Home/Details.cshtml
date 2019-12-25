@@ -1,0 +1,44 @@
+﻿@model laba.Models.QuestRoom
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="quest-details">
+    <div class="quest-image-wrap">
+        <img class="quest-image" src="~/Content/images/@Model.LogoPath" alt="" />
+    </div>
+    <div class="quest-info">
+        <h1 class="quest-title">@Model.Title</h1>
+        <h3 class="quest-desctiption">@Model.Description</h3>
+
+        <div class="quest-property">
+            <p><i class="fas fa-clock"></i> Duration: @Model.DurationTime</p>
+        </div>
+
+        <div class="quest-property">
+            <p><i class="fas fa-angry"></i> Difficulty: @Model.Difficulty / 10</p>
+        </div>
+
+        <div class="quest-property">
+            <p><i class="fas fa-surprise"></i> Fear level: @Model.FearLevel / 10</p>
+        </div>
+
+        <div class="quest-property">
+            <p><i class="fas fa-user-friends"></i>Players count min: @Model.MinPlayersCount, max: @Model.MaxPlayersCount</p>
+        </div>
+
+        <div class="phone-numbers-group">
+            @foreach (string phone in Model.PhoneNumbers)
+            {
+                <div class="quest-property">
+                    <p><i class="fas fa-phone"></i> @phone</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/quest-details.css">
+}

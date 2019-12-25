@@ -1,0 +1,25 @@
+﻿@using laba.Models
+@model List<laba.Models.QuestRoom>
+
+@{
+    ViewBag.Title = "Quest rooms list";
+}
+
+    <ul class="quests-list">
+        @foreach (QuestRoom room in Model)
+        {
+
+            <li class="quest-item">
+                <div class="jumbotron">
+                    <h1 class="display-4">@room.Title</h1>
+                    <p class="lead">@room.Description</p>
+                    <hr class="my-4">
+                    <p>Duration: @room.DurationTime</p>
+                    <p class="lead">
+                        @Html.ActionLink("Learn More", "Details", new { Id = room.Id }, new { @class = "btn btn-primary btn-raised" })
+                    </p>
+                </div>
+            </li>
+
+        }
+    </ul>

@@ -1,0 +1,21 @@
+﻿@using laba.Models
+@model List<QuestRoom>
+
+@{
+    ViewBag.Title = "Welcome, Sensei!";
+}
+
+<ul class="quests-list" style="margin-top: 40px">
+     @foreach (QuestRoom room in Model)
+     {
+         <li>
+            <div class="alert alert-dark" role="alert">
+                Click on title to edit a room: <a href="#" class="alert-link">@room.Title</a>. Give it a click if you like.
+            </div>
+         </li>
+     }
+</ul>
+
+<div class="col-md-12" style="text-align: center">
+    @Html.ActionLink(linkText: "Add another room", actionName: "add", routeValues: null, htmlAttributes:  new { @class = "btn btn-primary btn-lg active" })
+</div>

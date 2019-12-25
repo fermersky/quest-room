@@ -1,0 +1,11 @@
+﻿.quests-list {
+    list-style-type: none;
+}
+
+.quest-item {
+    box-shadow: 0 10px 10px #ccc;
+    margin-top: 40px;
+}
+
+
+

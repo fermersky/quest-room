@@ -1,0 +1,26 @@
+﻿@using data_driven.Models
+@model data_driven.Models.CommentsViewModel
+
+<div class="jumbotron">
+    <h1 class="display-4">@Model.Good.Title</h1>
+    <p class="lead">@Model.Good.Category</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">@Model.Good.Price$</a>
+    </p>
+</div>
+
+<h2>Reviews: </h2>
+
+@foreach (UserComment comment in Model.Comments)
+{
+    <div class="row">
+        <h4>@comment.UserName</h4>
+        <h4>@comment.CommentTitle</h4>
+        <h4>@comment.Date.ToString("dd.MM.yyyy")</h4>
+        <h4>@comment.Comment</h4>
+        <h4>@comment.Rate / 5</h4>
+    </div>
+    <hr />
+}

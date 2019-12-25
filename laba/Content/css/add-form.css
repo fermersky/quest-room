@@ -1,0 +1,56 @@
+﻿.mdl-textfield {
+    width: 100%;
+}
+
+.mdl-textfield__input {
+    margin-bottom: 8px;
+    padding: 10px;
+}
+
+.mdl-textfield__label {
+    padding-top: 14px;
+    padding-left: 10px;
+}
+
+.mdl-textfield__input,
+.mdl-textfield__label {
+    font-size: 30px;
+}
+
+.icon-container {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.fas {
+    font-size: 40px;
+}
+
+.fear-level-slider {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.fear-level-slider > span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.range-title,
+.range-value {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.range-value {
+    color: #3F51B5;
+}
+
+.mdl-slider__container {
+    width: 100%;
+}
+

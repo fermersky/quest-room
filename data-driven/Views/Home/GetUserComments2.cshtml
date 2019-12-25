@@ -1,0 +1,26 @@
+﻿@using data_driven.Models
+@model Tuple<Good, List<UserComment>>
+
+<div class="jumbotron">
+    <h1 class="display-4">@Model.Item1.Title</h1>
+    <p class="lead">@Model.Item1.Category</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">@Model.Item1.Price$</a>
+    </p>
+</div>
+
+<h2>Reviews: </h2>
+
+@foreach (UserComment comment in Model.Item2)
+{
+    <div class="row">
+        <h4>@comment.UserName</h4>
+        <h4>@comment.CommentTitle</h4>
+        <h4>@comment.Date.ToString("dd.MM.yyyy")</h4>
+        <h4>@comment.Comment</h4>
+        <h4>@comment.Rate / 5</h4>
+    </div>
+    <hr />
+}

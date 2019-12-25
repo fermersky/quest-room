@@ -1,0 +1,88 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap');
+
+
+.quest-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.quest-image-wrap {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+
+    box-shadow: 0 10px 15px #ccc;
+
+    margin-top: 40px;
+}
+
+.quest-image {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-height: 120%;
+}
+
+.quest-info {
+    text-align: center;
+}
+
+.quest-title {
+    margin-top: 40px;
+    background: rgba(254, 110, 8, 0.73);
+    padding: 20px;
+    color: #fff;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+
+    display: inline-block;
+    text-align: center;
+    align-self: center;
+}
+
+.quest-desctiption {
+    margin: 30px 0;
+}
+
+.quest-property {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: #ccc;
+    align-items: center;
+    padding: 0 40px 5px 40px;
+    box-shadow: 0px 3px 10px #ccc;
+    box-sizing: border-box;
+    padding-top: 20px;
+    margin-top: 30px;
+}
+
+.quest-property * {
+    line-height: 40px;
+}
+
+.quest-property p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.quest-property pre {
+    font-weight: bold;
+}
+
+.phone-numbers-group {
+    margin: 30px 0 100px 0;
+    border-left: 3px solid #279a06;
+    padding-left: 20px;
+}
+
+.fas {
+    font-size: 20px;
+    margin-right: 20px;
+}

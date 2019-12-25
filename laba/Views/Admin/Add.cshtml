@@ -8,9 +8,11 @@
 </div>
 
 <form action="/admin/add" method="post" class="row" style="margin-bottom: 500px">
+    @* Title field *@
     <div class="col-md-12 icon-container">
         <i class="fas fa-comment-dots"></i>
     </div>
+
 
     <div class="col-md-12">
         <div class="mdl-textfield mdl-js-textfield input-title">
@@ -26,6 +28,8 @@
         </div>
     </div>
 
+    @* DurationTime field *@
+
     <div class="col-md-12 icon-container">
         <i class="fas fa-clock"></i>
     </div>
@@ -36,6 +40,32 @@
             <label class="mdl-textfield__label" for="DurationTime">Duration Time (hours)</label>
         </div>
     </div>
+
+    @* Phones field *@
+
+    <hr />
+
+    <div class="col-md-12 icon-container">
+        <i class="fas fa-phone"></i>
+    </div>
+
+    <div class="col-md-12 phones-container">
+        <div class="mdl-textfield mdl-js-textfield input-title">
+            <input class="mdl-textfield__input" type="number" name="Phones">
+            <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <button type="button" id="addPhoneButton" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+
+
+    <hr />
+
+    @* Players count fields *@
 
     <div class="col-md-12 icon-container">
         <i class="fas fa-user-friends"></i>
@@ -55,6 +85,8 @@
         </div>
     </div>
 
+    @* FearLevel fields *@
+
     <div class="col-md-12 icon-container">
         <i class="fas fa-angry"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
     </div>
@@ -62,6 +94,8 @@
     <div style="width:300px" class="col-md-12 fear-level-slider">
         <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
     </div>
+
+    @* Difficulty fields *@
 
     <div class="col-md-12 icon-container">
         <i class="fas fa-surprise"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
@@ -86,6 +120,8 @@
 @section scripts {
     <script>
         $(function () {
+            let phoneCounter = 2;
+
             $("#fearLevelRange").on('input', function (e) {
                 $("#currentFearLevel").text($(this).val());
             });
@@ -93,6 +129,21 @@
             $("#difficultyLevelRange").on('input', function (e) {
                 $("#currentDifficultyLevel").text($(this).val());
             });
+
+            $("#addPhoneButton").on('click', function () {
+                const phoneTemplate = `
+                    <div class="mdl-textfield mdl-js-textfield input-title">
+                        <input class="mdl-textfield__input" type="number" name="Phones">
+                        <label class="mdl-textfield__label" for="Phones">Phone #${phoneCounter++}</label>
+                    </div>
+                `;
+                const container = $(".phones-container");
+
+                container.append(phoneTemplate);
+
+                const field = new MaterialTextfield(document.querySelector(".mdl-textfield .mdl-js-textfield .input-title"));
+                field.init();
+            })
         });
     </script>
 }

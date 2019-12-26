@@ -1,10 +1,12 @@
 ﻿using laba.Models;
 using laba.Repositories;
+using laba.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace laba.Controllers
 {
@@ -15,6 +17,8 @@ namespace laba.Controllers
         {
             this.repository = repository;
         }
+
+        [HttpGet]
         public ActionResult Index()
         {
             var rooms = this.repository.GetAll();
@@ -24,16 +28,27 @@ namespace laba.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            return View(new QuestRoom());
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Add(QuestRoom room)
+        public ActionResult Add(AddRoomViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    repository.Add(viewModel.Room);
+            //    return RedirectToRoute(new { controller = "home", action = "details", id = room.Id });
+            //}
+
+            if (viewModel.File.ContentLength > 0)
             {
-                repository.Add(room);
-                return RedirectToRoute(new { controller = "home", action = "details", id = room.Id });
+                string fileName = Path.GetFileName(viewModel.File.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                viewModel.File.SaveAs(path);
+
+                viewModel.Room.LogoPath = fileName;
+                repository.Add(viewModel.Room);
+                return RedirectToRoute(new { controller = "home", action = "details", id = viewModel.Room.Id });
             }
 
             return View();

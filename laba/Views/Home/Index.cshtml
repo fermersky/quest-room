@@ -12,11 +12,11 @@
             <li class="quest-item">
                 <div class="jumbotron">
                     <h1 class="display-4">@room.Title</h1>
-                    <p class="lead">@room.Description</p>
+                    <h2 class="lead">@room.Description</h2>
                     <hr class="my-4">
-                    <p>Duration: @room.DurationTime</p>
+                    <h3>Duration: @room.DurationTime</h3>
                     <p class="lead">
-                        @Html.ActionLink("Learn More", "Details", new { Id = room.Id }, new { @class = "btn btn-primary btn-raised" })
+                        @Html.ActionLink("Learn More", "Details", new { Id = room.Id }, new { @class = "btn btn-primary btn-raised btn-learn-more" })
                     </p>
                 </div>
             </li>

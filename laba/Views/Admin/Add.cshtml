@@ -1,4 +1,4 @@
-﻿@model laba.Models.QuestRoom
+﻿@model laba.ViewModels.AddRoomViewModel
 
 @{
     ViewBag.Title = "Adding new room page";
@@ -9,9 +9,9 @@
     <h1 style="text-align:center" class="col-md-12">Adding a new quest room</h1>
 </div>
 
-<form action="/admin/add" method="post" class="row" style="margin-bottom: 500px">
+@using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { style = "margin-bottom: 500px", enctype = "mulipart/form-data"}))
+{
     @* Title field *@
-
 
     <div class="drop-shadow col-md-12">
         <div class="col-md-12 icon-container">
@@ -20,14 +20,14 @@
 
         <div>
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.Title, new { @class="mdl-textfield__input" })
+                @Html.TextBoxFor(model => model.Room.Title, new { @class = "mdl-textfield__input" })
                 <label class="mdl-textfield__label" for="Title">Title</label>
             </div>
         </div>
 
         <div>
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.Description, new { @class = "mdl-textfield__input" })
+                @Html.TextBoxFor(model => model.Room.Description, new { @class = "mdl-textfield__input" })
                 <label class="mdl-textfield__label" for="Description">Description</label>
             </div>
         </div>
@@ -49,7 +49,7 @@
 
         <div>
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.DurationTime, new { @class = "mdl-textfield__input", @type="number" })
+                @Html.TextBoxFor(model => model.Room.DurationTime, new { @class = "mdl-textfield__input", @type = "number" })
                 <label class="mdl-textfield__label" for="DurationTime">Duration Time (hours)</label>
             </div>
         </div>
@@ -73,7 +73,7 @@
 
         <div class=" phones-container">
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.PhoneNumbers, new { @class = "mdl-textfield__input", @type="number" })
+                @Html.TextBoxFor(model => model.Room.PhoneNumbers, new { @class = "mdl-textfield__input", @type = "number" })
                 <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
             </div>
         </div>
@@ -94,14 +94,14 @@
 
         <div class="">
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.MinPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
+                @Html.TextBoxFor(model => model.Room.MinPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
                 <label class="mdl-textfield__label" for="MinPlayersCount">Min Players Count</label>
             </div>
         </div>
 
         <div class="">
             <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.MaxPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
+                @Html.TextBoxFor(model => model.Room.MaxPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
                 <label class="mdl-textfield__label" for="MaxPlayersCount">Max Players Count</label>
             </div>
         </div>
@@ -113,27 +113,27 @@
         </div>
     </div>
 
-    @* FearLevel fields *@
-
     <div class="drop-shadow col-md-12">
-
         <div class="row">
+
+            @* FearLevel field *@
+
             <div class="col-md-12 icon-container">
                 <i class="fas fa-surprise"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
             </div>
 
             <div style="width:300px" class="col-md-12 fear-level-slider">
-                <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="Room.FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
             </div>
 
-            @* Difficulty fields *@
+            @* Difficulty field *@
 
             <div class="col-md-12 icon-container">
                 <i class="fas fa-angry"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
             </div>
 
             <div style="width:300px" class="col-md-12 fear-level-slider">
-                <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Room.Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
             </div>
         </div>
 
@@ -146,14 +146,21 @@
     </div>
 
 
+    @* QuestRoom File *@
+
+    <div class="drop-shadow col-md-12">
+        <div>
+            <input type="file" name="File" id="file" />
+            <label for="File">Choose an image to display</label>
+        </div>
+    </div>
+
     <div class="col-md-12" style="text-align: center; padding-top: 50px;">
         <button style="transform: scale(1.5)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Add new quest room to db
         </button>
     </div>
-
-    <div id="container"></div>
-</form>
+}
 
 @section styles {
     <link href="~/Content/css/add-form.css" rel="stylesheet" />

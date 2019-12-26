@@ -34,28 +34,6 @@ namespace laba.Repositories
         public T GetById(int id)
         {
             return this.localList.FirstOrDefault(q => q.Id == id);
-
-            // интерфейс IEntity помог избежать ненужной рефлексии. Видел схожую реализацию, там где все сущности
-            // унаследованы от одного интерфейса, на реальном коммерческом проекте
-
-            // также добавил ограничения для интерфейса IRepository и репозитория
-
-            //T result = default;
-            //try
-            //{
-            //    foreach (T item in this.localList)
-            //    {
-            //        var value = item.GetType().GetProperty("Id").GetValue(item);
-
-            //        if (value != null && (int)value == id)
-            //            result = item;
-            //    }
-            //    return result;
-            //}
-            //catch (Exception)
-            //{
-            //    return result;
-            //}
         }
     }
 }

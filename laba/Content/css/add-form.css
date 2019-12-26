@@ -1,4 +1,31 @@
-﻿.mdl-textfield {
+﻿.splitter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 30px;
+}
+.drop-shadow {
+    box-shadow: 0 10px 20px #eee;
+    padding: 20px;
+    margin-bottom: 50px;
+    border-radius: 15px;
+}
+
+h1 {
+    background: #3F51B5;
+    color: #fff;
+    padding: 20px;
+}
+
+.splitter > span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3F51B5;
+    margin: 10px;
+}
+
+.mdl-textfield {
     width: 100%;
 }
 
@@ -52,5 +79,11 @@
 
 .mdl-slider__container {
     width: 100%;
+}
+
+
+#addPhoneButton {
+    margin-top: -20px;
+    margin-left: 20px;
 }
 

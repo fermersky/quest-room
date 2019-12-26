@@ -1,4 +1,8 @@
-﻿.quests-list {
+﻿ul {
+    list-style-type: none;
+}
+
+.quests-list {
     list-style-type: none;
 }
 

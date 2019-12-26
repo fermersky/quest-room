@@ -24,12 +24,18 @@ namespace laba.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            return View();
+            return View(new QuestRoom());
         }
 
         [HttpPost]
         public ActionResult Add(QuestRoom room)
         {
+            if (ModelState.IsValid)
+            {
+                repository.Add(room);
+                return RedirectToRoute(new { controller = "home", action = "details", id = room.Id });
+            }
+
             return View();
         }
     }

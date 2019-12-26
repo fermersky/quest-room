@@ -21,6 +21,7 @@ namespace laba.Repositories
 
         public T Add(T item)
         {
+            item.Id = localList.Count + 1;
             this.localList.Add(item);
             return item;
         }

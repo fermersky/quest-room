@@ -22,7 +22,7 @@ namespace laba.Utils
             builder
                 .Register(ctor => 
                     new CustomRespository<QuestRoom>(QuestRoomsSeed.GetSeed()))
-                .As<IRepository<QuestRoom>>();
+                .As<IRepository<QuestRoom>>().SingleInstance();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

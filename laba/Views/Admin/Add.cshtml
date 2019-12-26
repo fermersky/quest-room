@@ -1,4 +1,6 @@
-﻿@{
+﻿@model laba.Models.QuestRoom
+
+@{
     ViewBag.Title = "Adding new room page";
 }
 
@@ -9,100 +11,138 @@
 
 <form action="/admin/add" method="post" class="row" style="margin-bottom: 500px">
     @* Title field *@
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-comment-dots"></i>
-    </div>
 
 
-    <div class="col-md-12">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="text" name="Title">
-            <label class="mdl-textfield__label" for="Title">Title</label>
+    <div class="drop-shadow col-md-12">
+        <div class="col-md-12 icon-container">
+            <i class="fas fa-comment-dots"></i>
         </div>
-    </div>
 
-    <div class="col-md-12">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="text" name="Description">
-            <label class="mdl-textfield__label" for="Description">Description</label>
+        <div>
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.Title, new { @class="mdl-textfield__input" })
+                <label class="mdl-textfield__label" for="Title">Title</label>
+            </div>
+        </div>
+
+        <div>
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.Description, new { @class = "mdl-textfield__input" })
+                <label class="mdl-textfield__label" for="Description">Description</label>
+            </div>
+        </div>
+
+        <div class="splitter">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
     @* DurationTime field *@
 
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-clock"></i>
-    </div>
+    <div class="drop-shadow col-md-12">
 
-    <div class="col-md-12">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="number" name="DurationTime">
-            <label class="mdl-textfield__label" for="DurationTime">Duration Time (hours)</label>
+        <div class="icon-container">
+            <i class="fas fa-clock"></i>
+        </div>
+
+        <div>
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.DurationTime, new { @class = "mdl-textfield__input", @type="number" })
+                <label class="mdl-textfield__label" for="DurationTime">Duration Time (hours)</label>
+            </div>
+        </div>
+
+        <div class="splitter">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
     @* Phones field *@
 
-    <hr />
+    <div class="drop-shadow col-md-12">
+        <div class=" icon-container">
+            <i class="fas fa-phone"></i>
+            <button type="button" id="addPhoneButton" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">add</i>
+            </button>
+        </div>
 
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-phone"></i>
-    </div>
+        <div class=" phones-container">
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.PhoneNumbers, new { @class = "mdl-textfield__input", @type="number" })
+                <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
+            </div>
+        </div>
 
-    <div class="col-md-12 phones-container">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="number" name="Phones">
-            <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
+        <div class="splitter">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
-
-    <div class="col-md-12">
-        <button type="button" id="addPhoneButton" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-            <i class="material-icons">add</i>
-        </button>
-    </div>
-
-
-    <hr />
 
     @* Players count fields *@
 
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-user-friends"></i>
-    </div>
-
-    <div class="col-md-12">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="number" name="MinPlayersCount">
-            <label class="mdl-textfield__label" for="MinPlayersCount">Min Players Count</label>
+    <div class="drop-shadow col-md-12">
+        <div class=" icon-container">
+            <i class="fas fa-user-friends"></i>
         </div>
-    </div>
 
-    <div class="col-md-12">
-        <div class="mdl-textfield mdl-js-textfield input-title">
-            <input class="mdl-textfield__input" type="number" name="MaxPlayersCount">
-            <label class="mdl-textfield__label" for="MaxPlayersCount">Max Players Count</label>
+        <div class="">
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.MinPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
+                <label class="mdl-textfield__label" for="MinPlayersCount">Min Players Count</label>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="mdl-textfield mdl-js-textfield input-title">
+                @Html.TextBoxFor(model => model.MaxPlayersCount, new { @class = "mdl-textfield__input", @type = "number" })
+                <label class="mdl-textfield__label" for="MaxPlayersCount">Max Players Count</label>
+            </div>
+        </div>
+
+        <div class="splitter">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
     @* FearLevel fields *@
 
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-angry"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
-    </div>
+    <div class="drop-shadow col-md-12">
 
-    <div style="width:300px" class="col-md-12 fear-level-slider">
-        <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
-    </div>
+        <div class="row">
+            <div class="col-md-12 icon-container">
+                <i class="fas fa-surprise"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
+            </div>
 
-    @* Difficulty fields *@
+            <div style="width:300px" class="col-md-12 fear-level-slider">
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+            </div>
 
-    <div class="col-md-12 icon-container">
-        <i class="fas fa-surprise"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
-    </div>
+            @* Difficulty fields *@
 
-    <div style="width:300px" class="col-md-12 fear-level-slider">
-        <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+            <div class="col-md-12 icon-container">
+                <i class="fas fa-angry"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
+            </div>
+
+            <div style="width:300px" class="col-md-12 fear-level-slider">
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+            </div>
+        </div>
+
+        <div class="splitter">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
     </div>
 
 
@@ -111,6 +151,8 @@
             Add new quest room to db
         </button>
     </div>
+
+    <div id="container"></div>
 </form>
 
 @section styles {
@@ -120,8 +162,6 @@
 @section scripts {
     <script>
         $(function () {
-            let phoneCounter = 2;
-
             $("#fearLevelRange").on('input', function (e) {
                 $("#currentFearLevel").text($(this).val());
             });
@@ -130,19 +170,19 @@
                 $("#currentDifficultyLevel").text($(this).val());
             });
 
+            let phoneCounter = 2;
+
             $("#addPhoneButton").on('click', function () {
-                const phoneTemplate = `
-                    <div class="mdl-textfield mdl-js-textfield input-title">
-                        <input class="mdl-textfield__input" type="number" name="Phones">
-                        <label class="mdl-textfield__label" for="Phones">Phone #${phoneCounter++}</label>
-                    </div>
+                var phoneFieldComponent = document.createElement('div');
+                phoneFieldComponent.className = "mdl-textfield mdl-js-textfield"
+
+                phoneFieldComponent.innerHTML = `
+                     <input class="mdl-textfield__input" type="number" name="PhoneNumbers">
+                     <label class="mdl-textfield__label" for="Phones">Phone #${phoneCounter++}</label>
                 `;
-                const container = $(".phones-container");
 
-                container.append(phoneTemplate);
-
-                const field = new MaterialTextfield(document.querySelector(".mdl-textfield .mdl-js-textfield .input-title"));
-                field.init();
+                document.querySelector('.phones-container').appendChild(phoneFieldComponent);
+                componentHandler.upgradeElement(phoneFieldComponent);
             })
         });
     </script>

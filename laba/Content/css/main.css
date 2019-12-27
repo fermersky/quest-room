@@ -16,5 +16,37 @@
     margin-left: 20px;
 }
 
+.header {
+    height: 80px;
+    box-shadow: 0 5px 10px #eee;
+}
+
+.header-nav {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.header-nav > li > a {
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    background: #3F51B5;
+    color: #fff;
+    font-size: 20px;
+    margin: 15px;
+    box-shadow: 0 5px 10px #eee;
+    border-radius: 5px;
+
+    transition: .2s;
+
+}
+
+.header-nav > li > a:hover {
+    text-decoration: none;
+    background: #FE954B;
+}
 
 

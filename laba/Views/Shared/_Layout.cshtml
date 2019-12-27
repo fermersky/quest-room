@@ -14,7 +14,19 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <header class="header"></header>
+    <header class="header">
+        <ul class="header-nav">
+            <li>
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            <li>
+                @Html.ActionLink("Admin panel", "Index", "Admin")
+            </li>
+            <li>
+                @Html.ActionLink("Add room", "Add", "Admin")
+            </li>
+        </ul>
+    </header>
     <div class="container">
         @RenderBody()
     </div>

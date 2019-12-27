@@ -4,11 +4,12 @@
 
 .quests-list {
     list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 30px;
 }
 
 .quest-item {
-    box-shadow: 0 10px 10px #ccc;
-    margin-top: 40px;
 }
 
 .btn-learn-more {
@@ -48,5 +49,24 @@
     text-decoration: none;
     background: #FE954B;
 }
+
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.add-room-button {
+    transform: scale(1.4);
+    margin-top: 40px;
+}
+
+.add-room-button:hover {
+    text-decoration: none;
+}
+
 
 

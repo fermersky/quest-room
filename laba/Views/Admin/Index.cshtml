@@ -8,14 +8,34 @@
 <ul class="quests-list" style="margin-top: 40px">
      @foreach (QuestRoom room in Model)
      {
-         <li>
-            <div class="alert alert-dark" role="alert">
-                Click on title to edit a room: <a href="#" class="alert-link">@room.Title</a>. Give it a click if you like.
+        <li class="quest-item">
+            @{string imagePath = "/Content/images/" + room.LogoPath;}
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title" style="background: url(@imagePath) center / cover;">
+                    <h2 class="mdl-card__title-text">@room.Title</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    @room.Description
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    @Html.ActionLink("View More", "Details", "Home", 
+                       new { Id = room.Id }, 
+                       new { @class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" }
+                    )
+                </div>
+                <div class="mdl-card__menu">
+                    <a href="/admin/edit/@room.Id" style="color: #fff;">
+                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </a>
+                </div>
             </div>
-         </li>
+        </li>
      }
 </ul>
 
 <div class="col-md-12" style="text-align: center">
-    @Html.ActionLink(linkText: "Add another room", actionName: "add", routeValues: null, htmlAttributes:  new { @class = "btn btn-primary btn-lg active" })
+    @Html.ActionLink(linkText: "Add another room", actionName: "add", routeValues: null, 
+        htmlAttributes:  new { @class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add-room-button" })
 </div>

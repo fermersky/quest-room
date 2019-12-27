@@ -34,12 +34,6 @@ namespace laba.Controllers
         [HttpPost]
         public ActionResult Add(AddRoomViewModel viewModel)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    repository.Add(viewModel.Room);
-            //    return RedirectToRoute(new { controller = "home", action = "details", id = room.Id });
-            //}
-
             if (viewModel.File.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(viewModel.File.FileName);

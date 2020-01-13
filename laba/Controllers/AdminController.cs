@@ -34,7 +34,7 @@ namespace laba.Controllers
         [HttpPost]
         public ActionResult Add(AddRoomViewModel viewModel)
         {
-            if (viewModel.File.ContentLength > 0)
+            if (ModelState.IsValid && viewModel.File.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(viewModel.File.FileName);
                 string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
@@ -46,6 +46,39 @@ namespace laba.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var room = repository.GetById(id);
+            var vm = new AddRoomViewModel() { Room = room };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AddRoomViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.Update(viewModel.Room);
+                return View("index", repository.GetAll());
+            }
+            return View(viewModel);
+        }
+
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            var fileName = repository.GetById(id).LogoPath;
+            string fullPath = Request.MapPath("~/Content/Images/" + fileName);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+
+            repository.Delete(id);
         }
     }
 }

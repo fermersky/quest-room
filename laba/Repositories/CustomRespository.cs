@@ -35,5 +35,21 @@ namespace laba.Repositories
         {
             return this.localList.FirstOrDefault(q => q.Id == id);
         }
+
+        public T Update(T item)
+        {
+            int index = this.localList.FindIndex(q => q.Id == item.Id);
+            this.localList[index] = item;
+
+            return item;
+        }
+
+        public T Delete(int id)
+        {
+            var room = this.localList.Find(q => q.Id == id);
+            this.localList.Remove(room);
+
+            return room;
+        }
     }
 }

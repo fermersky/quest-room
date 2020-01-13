@@ -5,7 +5,9 @@
     ViewBag.Title = "Quest rooms list";
 }
 
-    <ul class="quests-list">
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="quests-list" style="flex-direction: column">
         @foreach (QuestRoom room in Model)
         {
 
@@ -23,3 +25,8 @@
 
         }
     </ul>
+}
+else
+{
+    <div style="text-align:center"><h3>No data to display</h3></div>
+}

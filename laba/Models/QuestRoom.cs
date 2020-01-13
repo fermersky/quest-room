@@ -1,11 +1,12 @@
-﻿using System;
+﻿using laba.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace laba.Models
 {
-    public class QuestRoom : IEntity
+    public partial class QuestRoom : IEntity
     {
         public int Id { get; set; }
 

@@ -3,6 +3,10 @@
 }
 
 .quests-list {
+    
+}
+
+.admin-quests-list {
     list-style-type: none;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -34,20 +38,19 @@
     font-weight: bold;
     display: block;
     padding: 10px 20px;
-    background: #3F51B5;
-    color: #fff;
+    color: #565656;
     font-size: 20px;
     margin: 15px;
-    box-shadow: 0 5px 10px #eee;
     border-radius: 5px;
-
     transition: .2s;
+    box-shadow: 0 5px 10px #eee;
 
 }
 
 .header-nav > li > a:hover {
     text-decoration: none;
-    background: #FE954B;
+    background: #FF4081;
+    color: #eee;
 }
 
 .demo-card-wide > .mdl-card__title {

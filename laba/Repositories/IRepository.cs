@@ -14,5 +14,7 @@ namespace laba.Repositories
         int Count { get; }
 
         T Add(T item);
+        T Update(T item);
+        T Delete(int id);
     }
 }

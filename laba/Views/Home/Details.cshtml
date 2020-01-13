@@ -8,12 +8,15 @@
     <div class="quest-image-wrap">
         <img class="quest-image" src="~/Content/images/@Model.LogoPath" alt="" />
     </div>
+
+    <h1 class="quest-title">@Model.Title</h1>
+    <h3 class="quest-desctiption">@Model.Description</h3>
+
     <div class="quest-info">
-        <h1 class="quest-title">@Model.Title</h1>
-        <h3 class="quest-desctiption">@Model.Description</h3>
+
 
         <div class="quest-property">
-            <p><i class="fas fa-clock"></i> Duration: @Model.DurationTime</p>
+            <p><i class="fas fa-clock"></i> Duration: @Model.DurationTime:00 (h)</p>
         </div>
 
         <div class="quest-property">

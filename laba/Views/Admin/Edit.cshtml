@@ -6,11 +6,15 @@
 
 
 <div class="row">
-    <h1 style="text-align:center" class="col-md-12">Adding a new quest room</h1>
+    <h1 style="text-align:center" class="col-md-12">Editing @Model.Room.Title quest room</h1>
 </div>
 
-@using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { style = "margin-bottom: 500px", enctype="multipart/form-data"}))
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { style = "margin-bottom: 500px", enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(model => model.Room.Id)
+
+    @Html.ValidationSummary()
+
     @* Title field *@
 
     <div class="drop-shadow col-md-12">
@@ -23,7 +27,6 @@
                 @Html.TextBoxFor(model => model.Room.Title, new { @class = "mdl-textfield__input" })
                 <label class="mdl-textfield__label" for="Title">Title</label>
             </div>
-            @Html.ValidationMessageFor(model => model.Room.Title)
         </div>
 
         <div>
@@ -72,11 +75,14 @@
             </button>
         </div>
 
-        <div class=" phones-container">
-            <div class="mdl-textfield mdl-js-textfield input-title">
-                @Html.TextBoxFor(model => model.Room.PhoneNumbers, new { @class = "mdl-textfield__input", @type = "number" })
-                <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
-            </div>
+        <div class="phones-container">
+            @foreach (string phone in Model.Room.PhoneNumbers)
+            {
+                <div class="mdl-textfield mdl-js-textfield input-phone">
+                    @Html.TextBox("Room.PhoneNumbers", phone, new { @class = "mdl-textfield__input", @type = "number", value = phone })
+                    <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
+                </div>
+            }
         </div>
 
         <div class="splitter">
@@ -120,21 +126,21 @@
             @* FearLevel field *@
 
             <div class="col-md-12 icon-container">
-                <i class="fas fa-surprise"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">2</span>
+                <i class="fas fa-surprise"></i><span class="range-title">Fear level:</span><span id="currentFearLevel" class="range-value">@Model.Room.FearLevel</span>
             </div>
 
             <div style="width:300px" class="col-md-12 fear-level-slider">
-                <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="Room.FearLevel" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="fearLevelRange" name="Room.FearLevel" type="range" min="1" value="@Model.Room.FearLevel" max="10" step="1"><span>10</span>
             </div>
 
             @* Difficulty field *@
 
             <div class="col-md-12 icon-container">
-                <i class="fas fa-angry"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">2</span>
+                <i class="fas fa-angry"></i><span class="range-title">Difficulty:</span><span id="currentDifficultyLevel" class="range-value">@Model.Room.Difficulty</span>
             </div>
 
             <div style="width:300px" class="col-md-12 fear-level-slider">
-                <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Room.Difficulty" type="range" min="1" value="2" max="10" step="1"><span>10</span>
+                <span>1</span><input class="mdl-slider mdl-js-slider" id="difficultyLevelRange" name="Room.Difficulty" type="range" min="1" value="@Model.Room.Difficulty" max="10" step="1"><span>10</span>
             </div>
         </div>
 
@@ -149,16 +155,18 @@
 
     @* QuestRoom File *@
 
-    <div class="drop-shadow col-md-12">
+    @*<div class="drop-shadow col-md-12">
         <div>
             <input type="file" name="File" id="file" />
             <label for="File">Choose an image to display</label>
         </div>
-    </div>
+    </div>*@
+
+    @Html.HiddenFor(model => model.Room.LogoPath)
 
     <div class="col-md-12" style="text-align: center; padding-top: 50px;">
         <button style="transform: scale(1.5)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Add new quest room to db
+            Update &laquo;@Model.Room.Title&raquo; room
         </button>
     </div>
 }
@@ -178,7 +186,7 @@
                 $("#currentDifficultyLevel").text($(this).val());
             });
 
-            let phoneCounter = 2;
+            let phoneCounter = document.querySelectorAll(".input-phone").length + 1;
 
             $("#addPhoneButton").on('click', function () {
                 var phoneFieldComponent = document.createElement('div');

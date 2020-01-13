@@ -5,37 +5,86 @@
     ViewBag.Title = "Welcome, Sensei!";
 }
 
-<ul class="quests-list" style="margin-top: 40px">
-     @foreach (QuestRoom room in Model)
-     {
-        <li class="quest-item">
-            @{string imagePath = "/Content/images/" + room.LogoPath;}
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title" style="background: url(@imagePath) center / cover;">
-                    <h2 class="mdl-card__title-text">@room.Title</h2>
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="admin-quests-list" style="margin-top: 40px">
+        @foreach (QuestRoom room in Model)
+        {
+            <li class="quest-item">
+                @{string imagePath = "/Content/images/" + room.LogoPath;}
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title" style="background: url(@imagePath) center / cover;">
+                        <h2 class="mdl-card__title-text">@room.Title</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        @room.Description
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        @Html.ActionLink("View More", "Details", "Home",
+                           new { Id = room.Id },
+                           new { @class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" }
+                        )
+                    </div>
+                    <div class="mdl-card__menu">
+                        <a href="/admin/edit/@room.Id" style="color: #fff;">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </a>
+                        <a data-room-id="@room.Id" class="deleteBtn" style="color: #fff;">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-                <div class="mdl-card__supporting-text">
-                    @room.Description
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    @Html.ActionLink("View More", "Details", "Home", 
-                       new { Id = room.Id }, 
-                       new { @class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" }
-                    )
-                </div>
-                <div class="mdl-card__menu">
-                    <a href="/admin/edit/@room.Id" style="color: #fff;">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                            <i class="material-icons">edit</i>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </li>
-     }
-</ul>
+            </li>
+        }
+    </ul>
+}
+else
+{
+     <div class="row">
+         <div class="col-md-12" style="text-align: center">
+             <h2>No data to display</h2>
+         </div>
+     </div>
+}
 
 <div class="col-md-12" style="text-align: center">
-    @Html.ActionLink(linkText: "Add another room", actionName: "add", routeValues: null, 
-        htmlAttributes:  new { @class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add-room-button" })
+    @Html.ActionLink(linkText: "Add room", actionName: "add", routeValues: null,
+        htmlAttributes: new { @class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add-room-button" })
 </div>
+
+<div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text">qweqwe</div>
+    <button class="mdl-snackbar__action" type="button">DELETE</button>
+</div>
+
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.deleteBtn').on('click', function (e) {
+                e.preventDefault();
+                const id = $(this).data('room-id');
+
+                const snackbarContainer = document.querySelector('#demo-snackbar-example');
+
+                var data = {
+                    message: 'Are you sure you wanna delete this room?',
+                    timeout: 2000,
+                    actionHandler: async () => { await confirmDelete(id); location.reload() },
+                    actionText: 'DELETE'
+                };
+
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            })
+
+            function confirmDelete(id) {
+                return fetch('http://localhost:53492/admin/delete/' + id, { method: 'DELETE' });
+            }
+        })
+    </script>
+}
+

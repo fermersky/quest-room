@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using laba.DAL;
 using laba.Models;
 using laba.Repositories;
 using System;
@@ -20,8 +21,7 @@ namespace laba.Utils
             // dependencies
 
             builder
-                .Register(ctor => 
-                    new CustomRespository<QuestRoom>(QuestRoomsSeed.GetSeed()))
+                .RegisterType<QuestRoomRepository>()
                 .As<IRepository<QuestRoom>>().SingleInstance();
 
             var container = builder.Build();

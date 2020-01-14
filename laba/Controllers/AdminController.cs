@@ -32,7 +32,7 @@ namespace laba.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(AddRoomViewModel viewModel)
+        public ActionResult Add(AddRoomViewModel viewModel, List<string> phoneNumber)
         {
             if (ModelState.IsValid && viewModel.File.ContentLength > 0)
             {
@@ -40,9 +40,14 @@ namespace laba.Controllers
                 string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
                 viewModel.File.SaveAs(path);
 
+                var phoneNumbers = phoneNumber.Select(number => new PhoneNumber() { Number = number, QuestRoomId = viewModel.Room.ID }).ToList();
+
+                viewModel.Room.PhoneNumbers = phoneNumbers;
+
+
                 viewModel.Room.LogoPath = fileName;
                 repository.Add(viewModel.Room);
-                return RedirectToRoute(new { controller = "home", action = "details", id = viewModel.Room.Id });
+                return RedirectToRoute(new { controller = "home", action = "details", id = viewModel.Room.ID });
             }
 
             return View();

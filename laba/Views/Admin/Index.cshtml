@@ -21,17 +21,17 @@
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         @Html.ActionLink("View More", "Details", "Home",
-                           new { Id = room.Id },
+                           new { Id = room.ID },
                            new { @class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" }
                         )
                     </div>
                     <div class="mdl-card__menu">
-                        <a href="/admin/edit/@room.Id" style="color: #fff;">
+                        <a href="/admin/edit/@room.ID" style="color: #fff;">
                             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                 <i class="material-icons">edit</i>
                             </button>
                         </a>
-                        <a data-room-id="@room.Id" class="deleteBtn" style="color: #fff;">
+                        <a data-room-id="@room.ID" class="deleteBtn" style="color: #fff;">
                             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                 <i class="material-icons">delete</i>
                             </button>

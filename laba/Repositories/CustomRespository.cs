@@ -1,53 +1,63 @@
-﻿using laba.Models;
+﻿using laba.DAL;
+using laba.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace laba.Repositories
 {
-    public class CustomRespository<T> : IRepository<T> where T : IEntity
+    public class CustomRespository<T> : IRepository<T> where T : class, IEntity
     {
 
-        private List<T> localList;
-        public int Count => localList.Count;
+        protected DbSet<T> localList;
+        protected QRContext context;
+
+        public int Count => this.localList.Count();
 
         // ctors
 
-        public CustomRespository() => this.localList = new List<T>();
-        public CustomRespository(List<T> list) => this.localList = list;
+        public CustomRespository() 
+        {
+            this.context = new QRContext();
+        }
 
         // methods
 
-        public T Add(T item)
+        public virtual T Add(T item)
         {
-            item.Id = localList.Count + 1;
             this.localList.Add(item);
+            this.context.SaveChanges();
             return item;
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return this.localList.ToList<T>();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
-            return this.localList.FirstOrDefault(q => q.Id == id);
+            return this.localList.FirstOrDefault(q => q.ID == id);
         }
 
-        public T Update(T item)
+        public virtual T Update(T item)
         {
-            int index = this.localList.FindIndex(q => q.Id == item.Id);
-            this.localList[index] = item;
+            var toUpdate = this.localList.FirstOrDefault(q => q.ID == item.ID);
+            context.Entry(toUpdate).CurrentValues.SetValues(item);
+
+            this.context.SaveChanges();
 
             return item;
         }
 
-        public T Delete(int id)
+        public virtual T Delete(int id)
         {
-            var room = this.localList.Find(q => q.Id == id);
+            var room = this.localList.FirstOrDefault(q => q.ID == id);
             this.localList.Remove(room);
+            this.context.SaveChanges();
+
 
             return room;
         }

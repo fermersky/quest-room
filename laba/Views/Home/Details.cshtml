@@ -1,4 +1,5 @@
-﻿@model laba.Models.QuestRoom
+﻿@using laba.Models
+@model laba.Models.QuestRoom
 
 @{
     ViewBag.Title = Model.Title;
@@ -32,10 +33,10 @@
         </div>
 
         <div class="phone-numbers-group">
-            @foreach (string phone in Model.PhoneNumbers)
+            @foreach (PhoneNumber phone in Model.PhoneNumbers)
             {
                 <div class="quest-property">
-                    <p><i class="fas fa-phone"></i> @phone</p>
+                    <p><i class="fas fa-phone"></i> @phone.Number</p>
                 </div>
             }
         </div>

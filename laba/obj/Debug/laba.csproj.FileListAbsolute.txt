@@ -259,3 +259,7 @@ C:\Users\Daniel\Desktop\quest-room\laba\obj\Debug\laba.csprojAssemblyReference.c
 C:\Users\Daniel\Desktop\quest-room\laba\obj\Debug\laba.csproj.CopyComplete
 C:\Users\Daniel\Desktop\quest-room\laba\obj\Debug\laba.dll
 C:\Users\Daniel\Desktop\quest-room\laba\obj\Debug\laba.pdb
+C:\Users\Daniel\Desktop\quest-room\laba\bin\EntityFramework.dll
+C:\Users\Daniel\Desktop\quest-room\laba\bin\EntityFramework.SqlServer.dll
+C:\Users\Daniel\Desktop\quest-room\laba\bin\EntityFramework.xml
+C:\Users\Daniel\Desktop\quest-room\laba\bin\EntityFramework.SqlServer.xml

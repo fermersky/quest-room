@@ -8,7 +8,7 @@ namespace laba.Models
 {
     public partial class QuestRoom : IEntity
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public string Title { get; set; }
         public string Description { get; set; }
@@ -16,8 +16,7 @@ namespace laba.Models
 
         public int MinPlayersCount { get; set; }
         public int MaxPlayersCount { get; set; }
-
-        public List<string> PhoneNumbers { get; set; }
+        public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
         public int FearLevel { get; set; }
         public int Difficulty { get; set; }
 

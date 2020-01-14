@@ -10,7 +10,7 @@ namespace laba.Models.Metadata
     [MetadataType(typeof(QuestRoomMetaData))]
     public partial class QuestRoom : IEntity
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     }
 
 
@@ -39,8 +39,7 @@ namespace laba.Models.Metadata
         [Range(1, 10)]
         public int MaxPlayersCount { get; set; }
 
-        [Required]
-        public List<string> PhoneNumbers { get; set; }
+        public List<PhoneNumber> PhoneNumbers { get; set; }
 
         [Required]
         [Range(1, 10)]

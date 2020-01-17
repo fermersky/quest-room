@@ -72,11 +72,6 @@ namespace laba.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var phoneNumbers = viewModel.PhoneNumbers.Select(phone => new PhoneNumber() { Number = phone.Number, QuestRoomId = viewModel.Room.ID }).ToList();
-
-                //phoneNumbers.ForEach(number => db.PhoneNumbers.Delete(number));
-                //phoneNumbers.ForEach(number => db.PhoneNumbers.Add(number));
-
                 var numbersList = viewModel.Room.PhoneNumbers.ToList();
                 var questRoomId = viewModel.Room.ID;
 

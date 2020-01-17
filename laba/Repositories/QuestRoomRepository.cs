@@ -26,12 +26,11 @@ namespace laba.Repositories
         public override QuestRoom Delete(int id)
         {
             var room = collection.FirstOrDefault(q => q.ID == id);
-            var container = new ContainerBuilder();
             var phoneRepo = DependencyResolver.Current.GetService<IUnitOfWork>();
 
-            foreach (var phone in room.PhoneNumbers)
+            for (int i = 0; i < room.PhoneNumbers.Count; i++)
             {
-                phoneRepo.PhoneNumbers.Delete(phone);
+                phoneRepo.PhoneNumbers.Delete((room.PhoneNumbers.ToList())[i]);
             }
 
             return base.Delete(id);

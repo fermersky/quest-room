@@ -31,6 +31,7 @@ namespace laba.Repositories
             for (int i = 0; i < room.PhoneNumbers.Count; i++)
             {
                 phoneRepo.PhoneNumbers.Delete((room.PhoneNumbers.ToList())[i]);
+                phoneRepo.Save();
             }
 
             return base.Delete(id);

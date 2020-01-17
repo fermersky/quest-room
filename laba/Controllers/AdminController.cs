@@ -7,21 +7,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using laba.Utils;
 
 namespace laba.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly IRepository<QuestRoom> repository;
-        public AdminController(IRepository<QuestRoom> repository)
+        private readonly IUnitOfWork db;
+        public AdminController(IUnitOfWork db)
         {
-            this.repository = repository;
+            this.db = db;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var rooms = this.repository.GetAll();
+            var rooms = db.QuestRooms.GetAll();
             return View(rooms);
         }
 
@@ -32,31 +33,36 @@ namespace laba.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(AddRoomViewModel viewModel, List<string> phoneNumber)
+        public ActionResult Add(AddRoomViewModel viewModel)
         {
             if (ModelState.IsValid && viewModel.File.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(viewModel.File.FileName);
                 string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
                 viewModel.File.SaveAs(path);
-
-                var phoneNumbers = phoneNumber.Select(number => new PhoneNumber() { Number = number, QuestRoomId = viewModel.Room.ID }).ToList();
-
-                viewModel.Room.PhoneNumbers = phoneNumbers;
-
-
                 viewModel.Room.LogoPath = fileName;
-                repository.Add(viewModel.Room);
+
+                var numbersList = viewModel.Room.PhoneNumbers.ToList();
+
+                numbersList.ForEach(number => db.PhoneNumbers.Add(number));
+
+                db.QuestRooms.Add(viewModel.Room);
+                db.Save();
+
                 return RedirectToRoute(new { controller = "home", action = "details", id = viewModel.Room.ID });
             }
 
-            return View();
+            return View(viewModel.Room);
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var room = repository.GetById(id);
+            var room = db.QuestRooms.GetById(id);
+
+            if (room == null)
+                return HttpNotFound();
+
             var vm = new AddRoomViewModel() { Room = room };
             return View(vm);
         }
@@ -66,8 +72,21 @@ namespace laba.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Update(viewModel.Room);
-                return View("index", repository.GetAll());
+                //var phoneNumbers = viewModel.PhoneNumbers.Select(phone => new PhoneNumber() { Number = phone.Number, QuestRoomId = viewModel.Room.ID }).ToList();
+
+                //phoneNumbers.ForEach(number => db.PhoneNumbers.Delete(number));
+                //phoneNumbers.ForEach(number => db.PhoneNumbers.Add(number));
+
+                var numbersList = viewModel.Room.PhoneNumbers.ToList();
+                var questRoomId = viewModel.Room.ID;
+
+                numbersList.ForEach(number => number.QuestRoomId = questRoomId);
+                numbersList.ForEach(number => db.PhoneNumbers.Update(number));
+
+                db.QuestRooms.Update(viewModel.Room);
+                db.Save();
+
+                return View("index", db.QuestRooms.GetAll());
             }
             return View(viewModel);
         }
@@ -75,7 +94,7 @@ namespace laba.Controllers
         [HttpDelete]
         public void Delete(int id)
         {
-            var fileName = repository.GetById(id).LogoPath;
+            var fileName = db.QuestRooms.GetById(id).LogoPath;
             string fullPath = Request.MapPath("~/Content/Images/" + fileName);
 
             if (System.IO.File.Exists(fullPath))
@@ -83,7 +102,8 @@ namespace laba.Controllers
                 System.IO.File.Delete(fullPath);
             }
 
-            repository.Delete(id);
+            db.QuestRooms.Delete(id);
+            db.Save();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace laba.ViewModels
     public class AddRoomViewModel
     {
         public HttpPostedFileBase File { get; set; }
-
         public QuestRoom Room { get; set; }
     }
 }

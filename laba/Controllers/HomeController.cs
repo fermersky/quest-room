@@ -1,5 +1,6 @@
 ﻿using laba.Models;
 using laba.Repositories;
+using laba.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,21 @@ namespace laba.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository<QuestRoom> repository;
-        public HomeController(IRepository<QuestRoom> repository)
+        private readonly IUnitOfWork db;
+        public HomeController(IUnitOfWork db)
         {
-            this.repository = repository;
+            this.db = db;
         }
 
         public ActionResult Index()
         {
-            var model = repository.GetAll();
+            var model = db.QuestRooms.GetAll();
             return View(model);
         }
 
         public ActionResult Details(int id)
         {
-            var room = this.repository.GetById(id);
+            var room = db.QuestRooms.GetById(id);
             if (room != null)
                 return View(room);
             else

@@ -2,7 +2,7 @@
 @model laba.ViewModels.AddRoomViewModel
 
 @{
-    ViewBag.Title = "Adding new room page";
+    ViewBag.Title = "Editing room page";
 }
 
 
@@ -77,12 +77,15 @@
         </div>
 
         <div class="phones-container">
+            @{ int index = 0; }
             @foreach (PhoneNumber phone in Model.Room.PhoneNumbers)
             {
                 <div class="mdl-textfield mdl-js-textfield input-phone">
-                    @Html.TextBox("Room.PhoneNumbers", phone.Number, new { @class = "mdl-textfield__input", @type = "number", value = phone.Number })
+                    <input type="hidden" value="@phone.ID" name="Room.PhoneNumbers[@index].ID" />
+                    <input type="number" class="mdl-textfield__input" value="@phone.Number"  name="Room.PhoneNumbers[@index].Number" />
                     <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
                 </div>
+                index++;
             }
         </div>
 
@@ -194,9 +197,11 @@
                 phoneFieldComponent.className = "mdl-textfield mdl-js-textfield"
 
                 phoneFieldComponent.innerHTML = `
-                     <input class="mdl-textfield__input" type="number" name="Room.PhoneNumbers">
-                     <label class="mdl-textfield__label" for="Room.PhoneNumbers">Phone #${phoneCounter++}</label>
+                     <input class="mdl-textfield__input" type="number" name=Room.PhoneNumbers[${phoneCounter - 1}].Number>
+                     <label class="mdl-textfield__label" for="PhoneNumbers">Phone #${phoneCounter}</label>
                 `;
+
+                phoneCounter++;
 
                 document.querySelector('.phones-container').appendChild(phoneFieldComponent);
                 componentHandler.upgradeElement(phoneFieldComponent);

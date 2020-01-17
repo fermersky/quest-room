@@ -3,63 +3,75 @@ using laba.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
 namespace laba.Repositories
 {
-    public class CustomRespository<T> : IRepository<T> where T : class, IEntity
+    public abstract class CustomRespository<T> : IRepository<T> where T : class, IEntity
     {
 
-        protected DbSet<T> localList;
-        protected QRContext context;
-
-        public int Count => this.localList.Count();
+        protected abstract DbSet<T> collection { get; set; }
+        protected DbContext context;
 
         // ctors
 
-        public CustomRespository() 
+        public CustomRespository(){}
+
+        public CustomRespository(DbContext context, DbSet<T> collection) 
         {
-            this.context = new QRContext();
+            this.context = context;
+            this.collection = collection;
         }
 
         // methods
 
         public virtual T Add(T item)
         {
-            this.localList.Add(item);
-            this.context.SaveChanges();
+            collection.Add(item);
             return item;
         }
 
         public virtual List<T> GetAll()
         {
-            return this.localList.ToList<T>();
+            return collection.ToList<T>();
         }
 
         public virtual T GetById(int id)
         {
-            return this.localList.FirstOrDefault(q => q.ID == id);
+            return collection.FirstOrDefault(q => q.ID == id);
         }
 
         public virtual T Update(T item)
         {
-            var toUpdate = this.localList.FirstOrDefault(q => q.ID == item.ID);
-            context.Entry(toUpdate).CurrentValues.SetValues(item);
-
-            this.context.SaveChanges();
+            context.Set<T>().AddOrUpdate(item);
 
             return item;
         }
 
         public virtual T Delete(int id)
         {
-            var room = this.localList.FirstOrDefault(q => q.ID == id);
-            this.localList.Remove(room);
-            this.context.SaveChanges();
-
-
+            var room = collection.FirstOrDefault(q => q.ID == id);
+            if (room != null)
+                Delete(room);
             return room;
+        }
+
+        public T Delete(T item)
+        {
+            if (context.Entry(item).State == EntityState.Detached)
+            {
+                collection.Attach(item);
+            }
+            context.Entry(item).State = EntityState.Deleted;
+
+            return item;
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
         }
     }
 }

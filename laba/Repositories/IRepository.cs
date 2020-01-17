@@ -11,10 +11,10 @@ namespace laba.Repositories
     {
         List<T> GetAll();
         T GetById(int id);
-        int Count { get; }
-
         T Add(T item);
         T Update(T item);
         T Delete(int id);
+        T Delete(T item);
+        void Save();
     }
 }

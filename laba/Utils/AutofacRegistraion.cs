@@ -24,6 +24,14 @@ namespace laba.Utils
                 .RegisterType<QuestRoomRepository>()
                 .As<IRepository<QuestRoom>>().SingleInstance();
 
+            builder
+                .RegisterType<PhoneNumberRespository>()
+                .As<IRepository<PhoneNumber>>().SingleInstance();
+
+            builder
+                .RegisterType<EFUnitOfWork>()
+                .As<IUnitOfWork>().SingleInstance();
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

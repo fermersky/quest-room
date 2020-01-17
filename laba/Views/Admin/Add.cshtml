@@ -11,6 +11,7 @@
 
 @using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { style = "margin-bottom: 500px", enctype="multipart/form-data"}))
 {
+    @Html.ValidationSummary()
     @* Title field *@
 
     <div class="drop-shadow col-md-12">
@@ -23,7 +24,6 @@
                 @Html.TextBoxFor(model => model.Room.Title, new { @class = "mdl-textfield__input" })
                 <label class="mdl-textfield__label" for="Title">Title</label>
             </div>
-            @Html.ValidationMessageFor(model => model.Room.Title)
         </div>
 
         <div>
@@ -72,9 +72,9 @@
             </button>
         </div>
 
-        <div class=" phones-container">
+        <div class="phones-container">
             <div class="mdl-textfield mdl-js-textfield input-title">
-                <input type="number" class="mdl-textfield__input" name="PhoneNumber" />
+                <input type="number" class="mdl-textfield__input" name="Room.PhoneNumbers[0].Number" />
                 <label class="mdl-textfield__label" for="MaxPlayersCount">Phone #1</label>
             </div>
         </div>
@@ -185,9 +185,11 @@
                 phoneFieldComponent.className = "mdl-textfield mdl-js-textfield"
 
                 phoneFieldComponent.innerHTML = `
-                     <input class="mdl-textfield__input" type="number" name="PhoneNumber">
-                     <label class="mdl-textfield__label" for="Room.PhoneNumbers">Phone #${phoneCounter++}</label>
+                     <input class="mdl-textfield__input" type="number" name=Room.PhoneNumbers[${phoneCounter - 1}].Number>
+                     <label class="mdl-textfield__label" for="PhoneNumbers">Phone #${phoneCounter}</label>
                 `;
+
+                phoneCounter++;
 
                 document.querySelector('.phones-container').appendChild(phoneFieldComponent);
                 componentHandler.upgradeElement(phoneFieldComponent);

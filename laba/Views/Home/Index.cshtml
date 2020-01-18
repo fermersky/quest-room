@@ -7,22 +7,16 @@
 
 @if (Model != null && Model.Count > 0)
 {
-    <ul class="quests-list" style="flex-direction: column">
+    <ul class="quests-list row" style="flex-direction: column">
         @foreach (QuestRoom room in Model)
         {
-
-            <li class="quest-item">
-                <div class="jumbotron">
-                    <h1 class="display-4">@room.Title</h1>
-                    <h2 class="lead">@room.Description</h2>
-                    <hr class="my-4">
-                    <h3>Duration: @room.DurationTime</h3>
-                    <p class="lead">
-                        @Html.ActionLink("Learn More", "Details", new { Id = room.ID }, new { @class = "btn btn-primary btn-raised btn-learn-more" })
-                    </p>
-                </div>
+            <li class="quest-item col-md-12">
+                <div style="background-image: url('/Content/images/@room.LogoPath')" class="quest-item-image col-md-12"></div>
+                @Html.ActionLink(room.Title, "Details", new { Id = room.ID }, new { @class = "quest-item-title" })
+                <div class="splitter"></div>
+                <h3 class="quest-item-desc">@room.Description</h3>
+                <p class="quest-item-fear"><i style="margin: 0 10px;" class="fas fa-surprise"></i>@room.FearLevel <i style="margin: 0 10px;" class="fas fa-angry"></i>@room.Difficulty</p>
             </li>
-
         }
     </ul>
 }
@@ -30,3 +24,5 @@ else
 {
     <div style="text-align:center"><h3>No data to display</h3></div>
 }
+
+@*@Html.ActionLink("Learn More", "Details", new { Id = room.ID }, new { @class = "btn btn-primary btn-raised btn-learn-more" })*@

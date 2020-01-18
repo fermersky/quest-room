@@ -13,7 +13,76 @@
     grid-row-gap: 30px;
 }
 
+.splitter {
+    width: 50px;
+    height: 3px;
+    background: #FF4081;
+    margin: 20px auto 0 auto;
+}
+
 .quest-item {
+    text-align: center;
+    margin: 40px 0;
+    overflow: hidden;
+
+    position: relative;
+}
+
+.quest-item::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    background: #FF4081;
+
+    top:-10px;
+    right: -23px;
+    transform: rotate(45deg)
+} 
+
+.quest-item-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-size: cover;
+    margin: 30px auto;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.quest-item-title {
+    color: #1d93eb;
+    font-weight: bold;
+    font-size: 55px;
+    position: relative;
+}
+
+.quest-item-title::before {
+    position: absolute;
+    content: '';
+    background: rgba(212, 220, 30, 0.2);
+    left: -20px;
+    right: -20px;
+    height: 0%;
+    transition: 0.2s;
+    bottom: 0;
+}
+
+.quest-item-title:hover {
+    text-decoration: none;
+    color: #1d93eb;
+}
+
+.quest-item-title:hover::before {
+    height: 100%;
+}
+
+.quest-item-desc {
+    color: #393939;
+}
+
+.quest-item-fear {
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .btn-learn-more {

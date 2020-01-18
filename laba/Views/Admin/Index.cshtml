@@ -10,7 +10,7 @@
     <ul class="admin-quests-list" style="margin-top: 40px">
         @foreach (QuestRoom room in Model)
         {
-            <li class="quest-item">
+            <li>
                 @{string imagePath = "/Content/images/" + room.LogoPath;}
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title" style="background: url(@imagePath) center / cover;">

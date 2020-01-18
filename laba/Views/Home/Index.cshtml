@@ -43,7 +43,7 @@
             <li class="quest-item col-md-12">
                 <div style="background-image: url('/Content/images/@room.LogoPath')" class="quest-item-image col-md-12"></div>
                 @Html.ActionLink(room.Title, "Details", new { Id = room.ID }, new { @class = "quest-item-title" })
-                <div class="splitter"></div>
+                <div class="index-splitter"></div>
                 <h3 class="quest-item-desc">@room.Description</h3>
                 <p class="quest-item-fear"><i style="margin: 0 10px;" class="fas fa-surprise"></i>@room.FearLevel <i style="margin: 0 10px;" class="fas fa-angry"></i>@room.Difficulty</p>
             </li>

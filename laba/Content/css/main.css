@@ -140,5 +140,17 @@
     text-decoration: none;
 }
 
+.fear-level-slider {
+    display: flex;
+}
+
+.filter-container {
+    padding-top: 40px;
+}
+
+.range-title {
+    margin: 0 10px 0 30px
+}
+
 
 

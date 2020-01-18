@@ -17,9 +17,16 @@ namespace laba.Controllers
             this.db = db;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int minFearLevel = 1, int minDifficulty = 1)
         {
-            var model = db.QuestRooms.GetAll();
+            var model = db.QuestRooms
+                .GetAll()
+                .Where(q => q.FearLevel >= minFearLevel && q.Difficulty >= minDifficulty)
+                .ToList();
+
+            ViewBag.MinFearLevel = minFearLevel;
+            ViewBag.MinDifficulty = minDifficulty;
+
             return View(model);
         }
 

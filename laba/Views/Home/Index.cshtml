@@ -5,8 +5,38 @@
     ViewBag.Title = "Quest rooms list";
 }
 
+@using (Html.BeginForm("Index", "Home", FormMethod.Get)) {
+<div method="get" class="row filter-container">
+    <div class="col-md-4">
+        <div class="col-md-12 icon-container" style="font-size: 17px;">
+            <span class="range-title">Min Fear level:</span><span id="currentFearLevel" class="range-value">@ViewBag.MinFearLevel</span>
+        </div>
+
+        <div style="width:300px" class="col-md-12 fear-level-slider">
+            <input class="mdl-slider mdl-js-slider" style="width: 400px;" id="fearLevelRange" name="minFearLevel" type="range" min="1" value="@ViewBag.MinFearLevel" max="10" step="1">
+        </div>
+    </div>
+
+    <div class="col-md-4 offset-1">
+        <div class="col-md-12 icon-container" style="font-size: 17px;">
+            <span class="range-title">Min Scream level:</span><span id="currentDifficultyLevel" class="range-value">@ViewBag.MinDifficulty</span>
+        </div>
+
+        <div style="width:300px" class="col-md-12 fear-level-slider">
+            <input class="mdl-slider mdl-js-slider" style="width: 400px;" id="difficultyLevelRange" name="minDifficulty" type="range" min="1" value="@ViewBag.MinDifficulty" max="10" step="1">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <button style="margin-left: 140px;" class="btn btn-primary btn-lg">Filter</button>
+    </div>
+</div>
+    }
+
 @if (Model != null && Model.Count > 0)
 {
+
+
     <ul class="quests-list row" style="flex-direction: column">
         @foreach (QuestRoom room in Model)
         {
@@ -25,4 +55,18 @@ else
     <div style="text-align:center"><h3>No data to display</h3></div>
 }
 
-@*@Html.ActionLink("Learn More", "Details", new { Id = room.ID }, new { @class = "btn btn-primary btn-raised btn-learn-more" })*@
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#fearLevelRange").on('input', function (e) {
+                $("#currentFearLevel").text($(this).val());
+            });
+
+            $("#difficultyLevelRange").on('input', function (e) {
+                $("#currentDifficultyLevel").text($(this).val());
+            });
+        });
+    </script>
+}
+

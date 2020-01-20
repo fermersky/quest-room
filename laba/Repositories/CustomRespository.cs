@@ -60,11 +60,7 @@ namespace laba.Repositories
 
         public T Delete(T item)
         {
-            if (context.Entry(item).State == EntityState.Detached)
-            {
-                collection.Attach(item);
-            }
-            context.Entry(item).State = EntityState.Deleted;
+            collection.Remove(item);
 
             return item;
         }

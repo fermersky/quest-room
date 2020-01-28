@@ -6,6 +6,20 @@
     
 }
 
+.myCarousel {
+    max-height: 620px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.carousel-inner, .carousel-item {
+    max-height: 620px;
+}
+
+.darken-img {
+    filter: brightness(40%);
+}
+
 .admin-quests-list {
     list-style-type: none;
     display: grid;
